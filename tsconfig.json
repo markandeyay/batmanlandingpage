@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
     "noEmit": true
   },
   "include": ["src", "api", "vite.config.ts"]

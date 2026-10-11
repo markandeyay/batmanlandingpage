@@ -25,7 +25,7 @@ if (!process.argv.includes('--no-build')) {
 }
 
 const html = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8')
-if (html.includes('—')) { console.error('FAIL: em dash found in dist/index.html'); process.exitCode = 1 }
+if (html.includes(String.fromCharCode(0x2014))) { console.error('FAIL: em dash found in dist/index.html'); process.exitCode = 1 }
 
 const server = spawn('npx', ['vite', 'preview', '--port', String(PORT), '--strictPort'], { shell, stdio: 'pipe' })
 const stopServer = () => { try { shell ? spawnSync('taskkill', ['/pid', String(server.pid), '/T', '/F']) : server.kill() } catch {} }

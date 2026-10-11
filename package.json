@@ -7,7 +7,9 @@
     "build": "tsc --noEmit -p . && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p .",
-    "qa": "node qa/shots.mjs"
+    "qa": "node qa/shots.mjs",
+    "test:api": "node qa/api-check.mjs",
+    "perf": "node qa/perf.mjs"
   },
   "repository": {
     "type": "git",

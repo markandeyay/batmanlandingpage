@@ -144,7 +144,11 @@ async function smsLinkFor(userId: string): Promise<string> {
 }
 
 class PhotonError extends Error {
-  constructor(message: string, readonly upstreamStatus: number) { super(message) }
+  readonly upstreamStatus: number
+  constructor(message: string, upstreamStatus: number) {
+    super(message)
+    this.upstreamStatus = upstreamStatus
+  }
 }
 
 /** Pulls the E.164 number out of an sms: link such as sms:+15551234567&body=Hi */
