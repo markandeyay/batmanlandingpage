@@ -53,7 +53,7 @@ const og = () => svgDoc(1200, 630, `
     <rect x="740" y="404" width="400" height="114" rx="26" fill="#FFFFFF" stroke="${C.lilac}" stroke-width="2"/>
     <circle cx="706" cy="494" r="24" fill="${C.lilac}"/>
     <g transform="translate(686 472) scale(0.156)">${symbol()}</g>
-    <text fill="${C.ink}"><tspan x="764" y="438">Got it. I'll keep watch until 6:45.</tspan><tspan x="764" dy="30">Text "pineapple" any time and</tspan><tspan x="764" dy="30">I'll call with an excuse to leave.</tspan></text>
+    <text fill="${C.ink}"><tspan x="764" y="438">Got it. I'll keep watch until 6:45.</tspan><tspan x="764" dy="30">Text "pineapple" any time and</tspan><tspan x="764" dy="30">I'll text you an excuse to leave.</tspan></text>
   </g>
   <text x="90" y="580" font-family="Atkinson Hyperlegible" font-weight="700" font-size="20" letter-spacing="1.5" fill="${C.indigo}">HACKNC 2026  ·  AGENTS IN IMESSAGE</text>`);
 

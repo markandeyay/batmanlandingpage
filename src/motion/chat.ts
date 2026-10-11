@@ -86,8 +86,11 @@ export function createChatScene(root: HTMLElement): ChatScene {
     let cap = 0
     caps.forEach((c, idx) => { if (Number(c.dataset.cap) <= stepNo) cap = idx })
     if (cap !== activeCap) {
-      caps[activeCap]?.classList.remove('is-active')
-      caps[cap]?.classList.add('is-active')
+      caps.forEach((c, idx) => {
+        c.classList.toggle('is-active', idx === cap)
+        c.classList.toggle('is-past', idx < cap)
+      })
+      caps[0]?.parentElement?.style.setProperty('--cap-progress', String(caps.length > 1 ? cap / (caps.length - 1) : 1))
       if (clock && capClock[cap]) clock.textContent = capClock[cap]
       activeCap = cap
     }

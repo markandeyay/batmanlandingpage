@@ -198,13 +198,6 @@ export async function handleSignup(req: SignupRequest, env: SignupEnv): Promise<
   }
   const { phone } = parsed.data
 
-  const limit = rateLimit(req.ip)
-  if (!limit.ok) {
-    return fail(429, 'rate_limited', 'Lots of sign-ups right now. Please try again in a little while.', {
-      'Retry-After': String(limit.retryAfter),
-    })
-  }
-
   const { PHOTON_PROJECT_ID: id, PHOTON_PROJECT_SECRET: secret } = env
   if (!id || !secret) {
     if (env.onVercel) {
@@ -218,6 +211,13 @@ export async function handleSignup(req: SignupRequest, env: SignupEnv): Promise<
       status: 200,
       body: { assignedNumber: mock, smsLink: `sms:${mock}`, mock: true },
     }
+  }
+
+  const limit = rateLimit(req.ip)
+  if (!limit.ok) {
+    return fail(429, 'rate_limited', 'Lots of sign-ups right now. Please try again in a little while.', {
+      'Retry-After': String(limit.retryAfter),
+    })
   }
 
   try {

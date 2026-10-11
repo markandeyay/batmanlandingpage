@@ -89,7 +89,8 @@ main:focus { outline: none; }
   transform: translateY(-160%); transition: transform var(--d-2) var(--ease-out);
 }
 .skip-link:focus { transform: none; }
-.skip-link--inline { position: absolute; }
+.skip-link--inline { position: absolute; top: 12px; left: var(--gutter); transform: none; }
+.skip-link--inline:not(:focus) { width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -168,7 +169,7 @@ main:focus { outline: none; }
 .note { align-self: center; margin-top: 10px; padding: 6px 12px; border-radius: 999px; background: var(--lilac); color: var(--indigo); font-size: 13px; font-weight: 700; text-align: center; }
 
 /* ---------- Hero ---------- */
-.hero { padding-top: calc(var(--header-h) + clamp(28px, 6vw, 72px)); padding-bottom: clamp(48px, 8vw, 96px); }
+.hero { padding-top: calc(var(--header-h) + clamp(28px, 6vw, 72px)); padding-bottom: clamp(48px, 8vw, 96px); overflow-x: clip; }
 .hero__grid { display: grid; gap: 48px; align-items: center; }
 @media (min-width: 960px) {
   .hero { min-height: min(100svh, 900px); display: flex; align-items: center; }
@@ -184,9 +185,9 @@ main:focus { outline: none; }
 .hero__visual { display: flex; justify-content: center; }
 .hero__phone-wrap { position: relative; width: min(300px, 78vw); }
 .porch { /* the porch light: one warm glow, left on for you */
-  position: absolute; inset: -14% -32% -8%; z-index: 0; border-radius: 50%;
+  position: absolute; inset: -12% -22% -8%; z-index: 0; border-radius: 50%;
   background:
-    radial-gradient(closest-side at 50% 30%, rgb(255 164 126 / 0.45), rgb(255 164 126 / 0) 70%),
+    radial-gradient(closest-side at 50% 30%, rgb(255 164 126 / 0.6), rgb(255 164 126 / 0) 72%),
     radial-gradient(closest-side, var(--lilac) 0 98%, transparent 100%);
 }
 .hero__phone { position: relative; z-index: 1; aspect-ratio: 9 / 19.5; box-shadow: 0 30px 60px -30px rgb(28 26 51 / 0.45); }
@@ -224,7 +225,7 @@ main:focus { outline: none; }
 .cap__day { font-weight: 700; color: var(--slate); font-size: var(--t-small); }
 .cap__label { color: var(--ink); max-width: 28rem; }
 .chat__phone { width: min(400px, 100%); margin-inline: auto; }
-.phone__screen { position: relative; flex: 1; }
+.phone__screen { position: relative; flex: 1; min-height: 0; }
 .typing { display: none; }
 
 /* ---------- Code words ---------- */
@@ -258,7 +259,7 @@ main:focus { outline: none; }
 .fact { padding: 24px; border-radius: 22px; background: var(--white); border: 1px solid var(--hair); }
 .fact h3 { font-size: 1.25rem; margin-bottom: 8px; }
 .fact p { color: var(--slate); }
-.fact--callout { background: var(--ink); border-color: var(--ink); grid-column: 1 / -1; }
+.fact--callout { background: var(--ink); border-color: var(--ink); }
 .fact--callout h3 { color: var(--glow); font-size: 1.5rem; }
 .fact--callout p { color: var(--milk); }
 .mark { position: relative; z-index: 0; color: var(--ink); font-weight: 700; white-space: nowrap; }
@@ -326,7 +327,7 @@ main:focus { outline: none; }
 .footer__mark { width: 44px; height: 44px; flex: none; }
 .footer__links { display: flex; flex-wrap: wrap; gap: 10px 24px; }
 .footer__links a { position: relative; color: var(--ink); font-weight: 700; text-decoration: none; padding-block: 4px; }
-.footer__fine { padding-top: 24px; border-top: 1px solid var(--hair); font-size: var(--t-cap); color: var(--slate); max-width: 60rem; }
+.footer__fine { padding-top: 24px; border-top: 1px solid var(--hair); font-size: var(--t-cap); color: var(--slate); }
 
 /* ==========================================================================
    Motion. Everything below only runs without a reduced-motion preference.
@@ -423,6 +424,24 @@ main:focus { outline: none; }
   /* sign-up success: one soft ring */
   .btn--ring.is-ringing::after { animation: ring 600ms var(--ease-out) 1; }
   @keyframes ring { from { opacity: 0.6; transform: scale(1); } to { opacity: 0; transform: scale(1.12, 1.35); } }
+}
+
+/* desktop: the night as a timeline, the current hour lit */
+@media (prefers-reduced-motion: no-preference) and (min-width: 900px) {
+  .motion-ready .caps { position: relative; grid-template-areas: none; gap: 26px; padding-left: 28px; }
+  .motion-ready .caps::before, .motion-ready .caps::after {
+    content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px; border-radius: 3px; background: rgb(58 49 145 / 0.15);
+  }
+  .motion-ready .caps::after { background: var(--indigo); transform-origin: 50% 0; transform: scaleY(var(--cap-progress, 0)); transition: transform var(--d-4) var(--ease-out); }
+  .motion-ready .cap { grid-area: auto; opacity: 1; translate: none; position: relative; }
+  .motion-ready .cap::before {
+    content: ""; position: absolute; left: -34px; top: 14px; width: 15px; height: 15px; border-radius: 50%;
+    background: var(--lilac); border: 3px solid var(--indigo); transform: scale(0.6); transition: transform var(--d-3) var(--ease-bubble), background-color var(--d-2) linear;
+  }
+  .motion-ready .cap.is-active::before, .motion-ready .cap.is-past::before { transform: none; background: var(--indigo); }
+  .motion-ready .cap:not(.is-active) .cap__time { color: var(--slate); }
+  .motion-ready .cap:not(.is-active) .cap__label { color: var(--slate); }
+  .motion-ready .cap__time, .motion-ready .cap__label { transition: color var(--d-2) linear; }
 }
 
 /* phones: the pinned stage stacks caption above the phone */

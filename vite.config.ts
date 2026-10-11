@@ -41,11 +41,28 @@ function localSignupApi(env: Record<string, string>): Plugin {
   }
 }
 
+/*
+  Social scrapers want absolute image URLs. On Vercel the production domain is
+  known at build time (VERCEL_PROJECT_PRODUCTION_URL); SITE_URL overrides it.
+*/
+function absoluteSocialUrls(site: string | undefined): Plugin {
+  return {
+    name: 'absolute-social-urls',
+    transformIndexHtml(html) {
+      if (!site) return html
+      const origin = (site.startsWith('http') ? site : `https://${site}`).replace(/\/$/, '')
+      return html
+        .replace(/content="\/og-image\.png"/g, `content="${origin}/og-image.png"`)
+        .replace('<meta property="og:type"', `<meta property="og:url" content="${origin}/">\n  <link rel="canonical" href="${origin}/">\n  <meta property="og:type"`)
+    },
+  }
+}
+
 export default defineConfig(({ mode }) => {
   // Empty prefix loads PHOTON_* for the local API only; nothing is exposed to the client bundle.
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    plugins: [localSignupApi(env)],
+    plugins: [localSignupApi(env), absoluteSocialUrls(env.SITE_URL || env.VERCEL_PROJECT_PRODUCTION_URL)],
     build: {
       target: 'es2022',
       modulePreload: { polyfill: false },
