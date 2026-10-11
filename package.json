@@ -1,0 +1,40 @@
+{
+  "name": "batman-landing",
+  "version": "1.0.0",
+  "description": "Landing page and sign-up for Batman, an iMessage contact that watches your back.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p . && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p .",
+    "qa": "node qa/shots.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markandeyay/batmanlandingpage.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/markandeyay/batmanlandingpage/issues"
+  },
+  "homepage": "https://github.com/markandeyay/batmanlandingpage#readme",
+  "dependencies": {
+    "zod": "^3.25.76",
+    "lenis": "^1.3.26"
+  },
+  "devDependencies": {
+    "@capsizecss/metrics": "^4.3.0",
+    "@fontsource/atkinson-hyperlegible": "^5.3.0",
+    "@fontsource/bricolage-grotesque": "^5.3.0",
+    "@types/node": "^26.6.5",
+    "playwright": "^1.64.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Batman: someone watching your back, right in iMessage</title>
+  <meta name="description" content="An iMessage contact that watches your back when you meet a stranger. It checks in quietly and alerts the friend you chose if you go silent. Secret code words get you out. No app needed.">
+  <meta name="theme-color" content="#F7F6FF">
+  <meta name="color-scheme" content="light">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Batman">
+  <meta property="og:title" content="Batman: someone watching your back, right in iMessage">
+  <meta property="og:description" content="An iMessage contact that checks in quietly and alerts the friend you chose if you go silent. No app needed.">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Batman logo, a friendly chat bubble with bat ears, next to an example iMessage conversation.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Batman: someone watching your back, right in iMessage">
+  <meta name="twitter:description" content="An iMessage contact that checks in quietly and alerts the friend you chose if you go silent. No app needed.">
+  <meta name="twitter:image" content="/og-image.png">
+
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="preload" href="/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion')</script>
+  <script type="module" src="/src/main.ts"></script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="mark" viewBox="0 0 256 256">
+        <g transform="translate(0 -5)">
+          <g fill="#3A3191" stroke="#3A3191" stroke-linejoin="round"><path d="M56 136 C50 100 56 62 72 36 C90 52 106 72 116 94 L100 136 Z" stroke-width="12"/><path transform="translate(256 0) scale(-1 1)" d="M56 136 C50 100 56 62 72 36 C90 52 106 72 116 94 L100 136 Z" stroke-width="12"/><path d="M62 128 C46 114 30 108 14 108 C18 124 18 136 16 150 Q36 140 58 154 Z" stroke-width="8"/><path transform="translate(256 0) scale(-1 1)" d="M62 128 C46 114 30 108 14 108 C18 124 18 136 16 150 Q36 140 58 154 Z" stroke-width="8"/></g>
+          <rect x="46" y="88" width="164" height="118" rx="59" fill="#3A3191"/>
+          <path d="M82 192 C80 212 70 224 52 232 C80 234 104 224 120 206 Z" fill="#3A3191"/>
+          <ellipse cx="107" cy="142" rx="12" ry="16" fill="#FFA47E"/>
+          <ellipse cx="149" cy="142" rx="12" ry="16" fill="#FFA47E"/>
+          <path d="M118 172 Q128 180 138 172" fill="none" stroke="#FFA47E" stroke-width="7" stroke-linecap="round"/>
+        </g>
+      </symbol>
+      <symbol id="status" viewBox="0 0 70 14">
+        <g fill="currentColor"><rect x="0" y="9" width="3" height="4" rx="1"/><rect x="5" y="6.5" width="3" height="6.5" rx="1"/><rect x="10" y="4" width="3" height="9" rx="1"/><rect x="15" y="1" width="3" height="12" rx="1"/></g>
+        <path d="M27 5.2a9.5 9.5 0 0 1 12.6 0M29.4 7.8a6 6 0 0 1 7.8 0M31.8 10.4a2.4 2.4 0 0 1 3 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <rect x="45.5" y="1.5" width="20" height="11" rx="3.2" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="47.5" y="3.5" width="16" height="7" rx="1.8" fill="currentColor"/><path d="M67.5 5.2v3.6" stroke="currentColor" stroke-opacity=".45" stroke-width="1.6" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="thumb" viewBox="0 0 20 20"><path fill="currentColor" d="M7.2 8.4 10 3.2c.3-.6 1-.9 1.6-.6.9.4 1.3 1.4 1 2.3l-.8 2.6h3.6c1.1 0 1.9 1 1.7 2.1l-1 5.3c-.2.9-1 1.6-1.9 1.6H7.2V8.4Zm-1.6 0v8.1H3.8c-.6 0-1-.4-1-1V9.4c0-.6.4-1 1-1h1.8Z"/></symbol>
+      <symbol id="heart" viewBox="0 0 20 20"><path fill="currentColor" d="M10 17.2s-6.8-4.1-6.8-9A3.8 3.8 0 0 1 10 5.9a3.8 3.8 0 0 1 6.8 2.3c0 4.9-6.8 9-6.8 9Z"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="header" data-header>
+    <div class="header__inner">
+      <a class="brand" href="#top" aria-label="Batman, back to top">
+        <svg class="brand__mark" viewBox="0 0 256 256" aria-hidden="true"><use href="#mark"/></svg>
+        <svg class="brand__word" viewBox="0 -102 486 112" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"><path d="M8 -94 V-28"/><circle cx="36" cy="-28" r="28"/><circle cx="120" cy="-28" r="28"/><path d="M148 -56 V0"/><path d="M188 -82 V-18 Q188 0 206 0"/><path d="M172 -56 H208"/><path d="M234 0 V-56 M234 -32 A22 22 0 0 1 278 -32 V0 M278 -32 A22 22 0 0 1 322 -32 V0"/><circle cx="374" cy="-28" r="28"/><path d="M402 -56 V0"/><path d="M432 0 V-56 M432 -32 A22 22 0 0 1 476 -32 V0"/></g></svg>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <ul>
+          <li class="nav__text"><a href="#how">How it works</a></li>
+          <li class="nav__text"><a href="#code-words">Code words</a></li>
+          <li class="nav__text"><a href="#privacy">Privacy</a></li>
+          <li><a class="btn btn--small" href="#get">Get Batman</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="progress" aria-hidden="true"></div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- 1. Hero -->
+    <section class="hero" id="top" aria-labelledby="hero-title" data-hero>
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow" data-intro style="--i:0">For first dates, Marketplace pickups and apartment viewings</p>
+          <h1 id="hero-title">Someone watching your back, right in&nbsp;<span class="hero__imsg">iMessage.</span></h1>
+          <p class="lede" data-intro style="--i:1">An iMessage contact that watches your back when you meet a stranger. It checks in quietly and alerts the friend you chose if you go silent. Secret code words get you out. No app needed.</p>
+          <div class="hero__ctas" data-intro style="--i:2">
+            <a class="btn btn--big" href="#get" data-focus-target="phone">Get your Batman</a>
+            <a class="btn btn--ghost btn--big" href="#how">See how it works</a>
+          </div>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__phone-wrap">
+            <div class="porch"></div>
+            <div class="phone hero__phone">
+              <div class="phone__bar"><span>6:12</span><svg viewBox="0 0 70 14"><use href="#status"/></svg></div>
+              <div class="phone__head"><span class="avatar"><svg viewBox="0 0 256 256"><use href="#mark"/></svg></span><span class="phone__name">Batman</span></div>
+              <ol class="thread">
+                <li class="stamp"><b>iMessage</b><br>Today 6:12 PM</li>
+                <li class="msg msg--me">Hi, I'm Robin</li>
+                <li class="receipt"><b>Read</b> 6:12 PM</li>
+                <li class="msg msg--bat">Hey Robin, I'm Batman. Text me before you meet someone new (a date, a Marketplace pickup, an apartment viewing) and I'll quietly look out for you.</li>
+              </ol>
+              <div class="phone__input"><span class="phone__plus">+</span><span class="phone__field">iMessage</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. How it works -->
+    <section class="how" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <h2 id="how-title">How it works</h2>
+          <p class="section-lede">Three steps, all inside the Messages app you already use.</p>
+        </div>
+        <ol class="steps" data-reveal-group>
+          <li class="step" data-reveal="scrub">
+            <span class="step__num" aria-hidden="true">1</span>
+            <p class="step__when">Before you go</p>
+            <h3>Plan</h3>
+            <p>Text Batman before a first date, a Marketplace pickup, or an apartment viewing. It asks a couple of quick questions.</p>
+          </li>
+          <li class="step" data-reveal="scrub">
+            <span class="step__num" aria-hidden="true">2</span>
+            <p class="step__when">While you're there</p>
+            <h3>Quiet watch</h3>
+            <p>Share your location for just that window. Batman stays silent while things look normal.</p>
+          </li>
+          <li class="step" data-reveal="scrub">
+            <span class="step__num" aria-hidden="true">3</span>
+            <p class="step__when">Only if something's off</p>
+            <h3>Escalate</h3>
+            <p>If something looks off it checks in. Go quiet and it alerts the friend you chose with your last location.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 3. Pinned conversation -->
+    <section class="chat" id="conversation" data-chat aria-labelledby="chat-title">
+      <a class="skip-link skip-link--inline" href="#code-words">Skip the example conversation</a>
+      <div class="chat__stage">
+        <div class="chat__captions">
+          <h2 id="chat-title" class="chat__kicker">One night with Batman</h2>
+          <ol class="caps">
+            <li class="cap" data-cap="1"><span class="cap__when"><time class="cap__time">6:12 PM</time> <span class="cap__day">Tuesday</span></span><span class="cap__label">Say hi. Batman asks who it can text if you need help.</span></li>
+            <li class="cap" data-cap="5"><span class="cap__when"><time class="cap__time">2:40 PM</time> <span class="cap__day">Saturday</span></span><span class="cap__label">Text your plan. Batman reads it back so nothing is a guess.</span></li>
+            <li class="cap" data-cap="10"><span class="cap__when"><time class="cap__time">7:45 PM</time> <span class="cap__day">Saturday</span></span><span class="cap__label">One quiet check-in. A short reply is all it needs.</span></li>
+            <li class="cap" data-cap="13"><span class="cap__when"><time class="cap__time">9:04 PM</time> <span class="cap__day">Saturday</span></span><span class="cap__label">You're home. The plan closes and location sharing stops.</span></li>
+          </ol>
+        </div>
+
+        <div class="phone chat__phone" data-chat-phone>
+          <div class="phone__bar" aria-hidden="true"><span data-chat-clock>6:12</span><svg viewBox="0 0 70 14"><use href="#status"/></svg></div>
+          <div class="phone__head" aria-hidden="true"><span class="avatar"><svg viewBox="0 0 256 256"><use href="#mark"/></svg></span><span class="phone__name">Batman</span></div>
+          <div class="phone__screen" data-chat-screen>
+            <ol class="thread" data-chat-thread aria-label="Example conversation between Robin and Batman">
+              <li class="stamp"><b>iMessage</b><br>Tuesday 6:12 PM</li>
+              <li class="msg msg--me" data-step="1" data-kind="me"><span class="sr">Robin: </span>Hi, I'm Robin</li>
+              <li class="receipt" data-step="4" data-kind="receipt"><b>Read</b> 6:12 PM</li>
+              <li class="msg msg--bat" data-step="2" data-kind="bat"><span class="sr">Batman: </span>Hey Robin, I'm Batman. Text me before you meet someone new (a date, a Marketplace pickup, an apartment viewing) and I'll quietly look out for you.</li>
+              <li class="msg msg--bat" data-step="3" data-kind="bat"><span class="sr">Batman: </span>Quick setup, takes a minute. Who should I contact if you might need help? Send me their name and number, or share their contact card.</li>
+
+              <li class="stamp" data-step="5" data-kind="stamp">Saturday 2:40 PM</li>
+              <li class="msg msg--me" data-step="5" data-kind="me"><span class="sr">Robin: </span>Date at 7 at Lula Cafe with Jordan</li>
+              <li class="msg msg--bat" data-step="6" data-kind="bat"><span class="sr">Batman: </span>Here's the plan: Date with Jordan, Sat 7:00 PM at Lula Cafe. Back by about 9:00 PM. If something seems off I'll text you, then text Alfred. Reply GO to lock it in, or tell me what to change.</li>
+              <li class="msg msg--me" data-step="7" data-kind="me"><span class="sr">Robin: </span>go<span class="tapback" data-step="8" data-kind="tapback"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#thumb"/></svg><span class="sr"> (Batman liked this)</span></span></li>
+              <li class="msg msg--bat" data-step="9" data-kind="bat"><span class="sr">Batman: </span>Locked in. Around 6:30 I'll ask you to share your location until it's over.</li>
+
+              <li class="stamp" data-step="10" data-kind="stamp">Saturday 7:45 PM</li>
+              <li class="msg msg--bat" data-step="10" data-kind="bat"><span class="sr">Batman: </span>Hey, everything good?</li>
+              <li class="msg msg--me" data-step="11" data-kind="me"><span class="sr">Robin: </span>yeah lol<span class="tapback" data-step="12" data-kind="tapback"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#heart"/></svg><span class="sr"> (Batman loved this)</span></span></li>
+
+              <li class="stamp" data-step="13" data-kind="stamp">Saturday 9:04 PM</li>
+              <li class="msg msg--me" data-step="13" data-kind="me"><span class="sr">Robin: </span>home</li>
+              <li class="msg msg--bat" data-step="14" data-kind="bat"><span class="sr">Batman: </span>Glad you're back. Plan closed and your location's no longer shared with me.</li>
+            </ol>
+            <div class="typing" data-chat-typing aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+          <div class="phone__input" aria-hidden="true"><span class="phone__plus">+</span><span class="phone__field">iMessage</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Code words -->
+    <section class="codes" id="code-words" aria-labelledby="codes-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <h2 id="codes-title">Two code words, for when you can't say it out loud</h2>
+          <p class="section-lede">You pick both during setup. They look like any other text, so you can send one with someone sitting right next to you.</p>
+        </div>
+        <div class="codes__grid">
+          <article class="code" data-reveal="scrub" data-demo>
+            <div class="code__copy">
+              <p class="code__tag">Exit word</p>
+              <h3>Get a reason to leave</h3>
+              <p>Text it and Batman replies like a friend, then texts you an urgent "call me" so you have an excuse to leave.</p>
+            </div>
+            <div class="mini" aria-label="Example: Robin texts the exit word">
+              <ol class="thread">
+                <li class="msg msg--me" data-demo-step><span class="sr">Robin: </span>pineapple</li>
+                <li class="msg msg--bat" data-demo-step><span class="sr">Batman: </span>omg yes, tell me everything later</li>
+                <li class="msg msg--bat" data-demo-step><span class="sr">Batman: </span>Hey, call me when you see this. It's kind of urgent.</li>
+              </ol>
+            </div>
+          </article>
+          <article class="code" data-reveal="scrub" data-demo>
+            <div class="code__copy">
+              <p class="code__tag">Alert word</p>
+              <h3>Get help without a scene</h3>
+              <p>Text it and Batman quietly alerts your friend with your location. You get an innocent reply, nothing that gives it away.</p>
+            </div>
+            <div class="mini" aria-label="Example: Robin texts the alert word">
+              <ol class="thread">
+                <li class="msg msg--me" data-demo-step><span class="sr">Robin: </span>blueberry</li>
+                <li class="msg msg--bat" data-demo-step><span class="sr">Batman: </span>Sounds good, have fun tonight</li>
+                <li class="note" data-demo-step>Meanwhile, Alfred gets a heads-up with your location.</li>
+              </ol>
+            </div>
+          </article>
+        </div>
+        <p class="codes__fine" data-reveal>"pineapple" and "blueberry" are examples. Choose words you would never text by accident.</p>
+      </div>
+    </section>
+
+    <!-- 5. Trust -->
+    <section class="trust" id="privacy" aria-labelledby="trust-title">
+      <div class="wrap trust__grid">
+        <div class="trust__head" data-reveal>
+          <h2 id="trust-title">Plain answers before you trust it</h2>
+          <p class="section-lede">What Batman does, what it keeps, and where it stops.</p>
+        </div>
+        <ul class="facts">
+          <li class="fact" data-reveal>
+            <h3>Your friend says yes first</h3>
+            <p>Batman texts the friend you pick and asks. Nothing is set up until they agree.</p>
+          </li>
+          <li class="fact" data-reveal>
+            <h3>Location only during the plan</h3>
+            <p>You share it for that window and nothing longer. It's <span class="mark" data-reveal="mark">deleted 24 hours after</span> the plan ends.</p>
+          </li>
+          <li class="fact" data-reveal>
+            <h3>It watches you, not them</h3>
+            <p>Batman never looks up, tracks or messages the person you're meeting.</p>
+          </li>
+          <li class="fact fact--callout">
+            <h3>Batman is not 911</h3>
+            <p>It never calls emergency services. If something is wrong, it tells your friend to call. If you're in danger right now, call 911 yourself.</p>
+          </li>
+          <li class="fact" data-reveal>
+            <h3>It can fail</h3>
+            <p>A dead phone, no signal or an outage can stop a check-in from getting through. Think of Batman as a backup, not a guarantee.</p>
+          </li>
+          <li class="fact" data-reveal>
+            <h3>Adults only</h3>
+            <p>Batman is for people 18 and older.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Sign-up -->
+    <section class="get" id="get" aria-labelledby="get-title">
+      <div class="wrap get__grid">
+        <div class="get__copy" data-reveal>
+          <h2 id="get-title">Get your Batman</h2>
+          <p>Enter your mobile number and you'll get your own Batman contact to text. Setup happens in the chat and takes about a minute.</p>
+        </div>
+        <div class="card get__card" data-reveal>
+          <div class="get__cell">
+            <form class="form" data-signup novalidate>
+              <div class="field">
+                <label for="phone">Your mobile number</label>
+                <div class="phone-input">
+                  <span class="phone-input__cc" aria-hidden="true">+1</span>
+                  <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(919) 555-0123" maxlength="14" required aria-describedby="phone-hint phone-error">
+                </div>
+                <p class="hint" id="phone-hint">US numbers only for now.</p>
+                <p class="error" id="phone-error" data-error-for="phone" hidden></p>
+              </div>
+              <div class="field field--check">
+                <input id="adult" name="adult" type="checkbox" required aria-describedby="adult-error">
+                <label for="adult">I'm 18 or older</label>
+                <p class="error" id="adult-error" data-error-for="adult" hidden></p>
+              </div>
+              <div class="hp" aria-hidden="true">
+                <label for="website">Leave this empty</label>
+                <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+              <button class="btn btn--big btn--block" type="submit" data-submit><span class="btn__label">Get my Batman number</span><span class="spinner" aria-hidden="true"></span></button>
+              <p class="error error--form" data-error-for="form" role="alert" hidden></p>
+              <p class="fine">Your number is used only to set up and run your Batman.</p>
+            </form>
+
+            <div class="result" data-result tabindex="-1" hidden>
+              <p class="result__mock" data-mock hidden>Demo mode: this is a sample number and no account was created.</p>
+              <p class="result__lead">Your Batman number is</p>
+              <p class="result__num" data-number></p>
+              <a class="btn btn--big btn--block btn--ring" data-sms href="#">Text Batman</a>
+              <p class="result__note">Text it first. Batman can't message you until you do.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div class="footer__brand">
+        <svg class="footer__mark" viewBox="0 0 256 256" aria-hidden="true"><use href="#mark"/></svg>
+        <p>Built at HackNC 2026 for the Photon "Agents in iMessage" track.</p>
+      </div>
+      <ul class="footer__links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#code-words">Code words</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="https://github.com/markandeyay/batman" rel="noopener">Source on GitHub</a></li>
+      </ul>
+      <p class="footer__fine">Batman is a hackathon codename. This project is not affiliated with, endorsed by or connected to DC Comics or Warner Bros. Discovery. Fonts: Bricolage Grotesque and Atkinson Hyperlegible, SIL Open Font License.</p>
+    </div>
+  </footer>
+</body>
+</html>
